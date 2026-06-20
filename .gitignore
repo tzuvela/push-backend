@@ -1,0 +1,12 @@
+private_key.pem
+subscriptions.json
+
+.venv/
+**pycache**/
+_.pyc
+.venv/
+env/
+venv/
+.DS_Store
+.vscode/
+_.egg-info/

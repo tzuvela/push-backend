@@ -1,0 +1,6 @@
+Flask
+flask-cors
+pywebpush
+cryptography
+python-dotenv
+gunicorn
