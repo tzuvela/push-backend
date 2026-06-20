@@ -85,5 +85,25 @@ def send_notification():
 def vapid_public_key():
     return jsonify({"publicKey": load_vapid_public_key()})
 
+
+@app.route("/unsubscribe", methods=["POST"])
+def unsubscribe():
+    data = request.json
+    endpoint = data.get("endpoint")
+    
+    if not endpoint:
+        return jsonify({"error": "Missing endpoint"}), 400
+    
+    global subscriptions
+    before = len(subscriptions)
+    subscriptions = [s for s in subscriptions if s["endpoint"] != endpoint]
+    after = len(subscriptions)
+    save_subscriptions(subscriptions)
+    
+    return jsonify({
+        "removed": before-after,
+        "remaining": after
+    })
+
 if __name__ == "__main__":
     app.run(use_reloader=False)
